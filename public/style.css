@@ -1,4 +1,13 @@
+@import url(palette.css);
+
 @font-face {
     /*font-family: ;
     src: url();*/
+}
+
+.navbar{
+    background-color: var(--light-black);
+    width: 95%;
+    margin-left: 2.5%;
+    height: 10%;
 }
