@@ -6,8 +6,23 @@
 }
 
 .navbar{
+    display: flex       ;
     background-color: var(--light-black);
-    width: 95%;
-    margin-left: 2.5%;
-    height: 10%;
+
+    position: fixed;
+    width: 950px;
+    margin-left: 2.5%;  
+    border-radius: 20px;  
+    
+    justify-content: center;
+}
+
+.nav-item, .nav-sep{
+    position: relative;
+    padding: 2.5%;
+    padding-left: 5%;
+    padding-right: 5%;
+
+    color: #fff;
+    text-decoration: none;
 }
