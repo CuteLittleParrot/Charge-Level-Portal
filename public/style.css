@@ -1,13 +1,29 @@
-@import url(palette.css);
-
-@font-face {
-    /*font-family: ;
-    src: url();*/
-}
+@import url(settings.css);
 
 .navbar{
+    display: flex       ;
     background-color: var(--light-black);
+
+    position: fixed;
     width: 95%;
-    margin-left: 2.5%;
-    height: 10%;
+    margin-left: 2.5%;  
+    border-radius: 10px;  
+    
+    justify-content: center;
+}
+
+.nav-item, .nav-sep{
+    position: relative;
+    padding: 2.5% 5%;
+
+    font-family: "Horizon", sans-serif;
+    font-weight: 1000;
+    font-stretch: ultra-expanded;
+    font-size: clamp(0px, 3.5vw, 40px);
+    color: white;
+    text-decoration: none;
+}
+
+.navbar-item:hover {
+    color: #b0b0b0; 
 }

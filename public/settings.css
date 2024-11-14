@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "Horizon";
+    src: url("horizon.otf");
+} 
+
 :root {
     --aquamarine-azure: #47ac96;
     --dark-grey: #545454;
