@@ -1,29 +1,90 @@
 @import url(settings.css);
 
+body{
+    padding-top: 7.75vw;
+    background-color: var(--dark-grey);
+}
+
+.header{
+    position: fixed;
+    background-color: var(--dark-grey);
+
+    padding: 2%;
+    margin: -9vw 0px;
+    width: 100%;
+}
+
 .navbar{
-    display: flex       ;
+    display: flex;
     background-color: var(--light-black);
 
-    position: fixed;
-    width: 95%;
-    margin-left: 2.5%;  
-    border-radius: 10px;  
+    width: 95%;         
+    border-radius: 40px;  
     
     justify-content: center;
 }
 
 .nav-item, .nav-sep{
     position: relative;
-    padding: 2.5% 5%;
+    padding: 1% 2%;
 
     font-family: "Horizon", sans-serif;
     font-weight: 1000;
     font-stretch: ultra-expanded;
-    font-size: clamp(0px, 3.5vw, 40px);
-    color: white;
+    font-size: clamp(0px, 2.5vw, 40px);
     text-decoration: none;
+    color: white; 
 }
+
 
 .navbar-item:hover {
     color: #b0b0b0; 
+}
+
+.panel{    
+    background-color: var(--aquamarine-azure);
+    border-radius: 40px;
+    margin: 0px 2.5%;
+}       
+
+.left-side, .right-side{
+    margin-left: 5%;
+    margin-right: 5%;
+    flex-basis: 50%;
+    overflow: auto;
+}
+
+#intro {
+    display: flex;
+    flex-direction: row;
+
+    background-color: var(--aquamarine-azure);
+    border-radius: 10px;
+    border-color: var(--aquamarine-azure);
+
+    color: #ffffff;
+
+    /* Aggiungi margine superiore */
+    margin-top: 10px; /* Sostituisci 70px con l'altezza della tua navbar */
+}
+
+.title{
+    font-family: "Horizon", sans-serif;
+    font-weight: 1000;
+    font-stretch: ultra-expanded;
+
+    font-size: clamp(50px, 5vw, 100px);
+}
+
+.image-container{
+    background-color: var(--light-black);
+    border-radius: 20px;
+
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+#intro-image{
+    width: 100%;
+    height: 60%;
 }
