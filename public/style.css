@@ -7,36 +7,28 @@ body{
 
 .header{
     position: fixed;
+    top: 0px;
+    left: 0px;
     background-color: var(--dark-grey);
 
-    padding: 2%;
-    margin: -9vw 0px;
+    padding: 2% 0%;
+    margin: 0px 0px;
     width: 100%;
 }
 
 .navbar{
-<<<<<<< HEAD
     display: flex;
     background-color: var(--light-black);
 
-    width: 95%;         
-    border-radius: 40px;  
-=======
-    display: flex       ;
-    background-color: var(--light-black);
-
-    position: fixed;
-    width: 950px;
-    margin-left: 2.5%;  
-    border-radius: 20px;  
->>>>>>> origin/main
+    width: 95%;
+    margin: 0px 2.5%;        
+    border-radius: ;  
     
     justify-content: center;
 }
 
 .nav-item, .nav-sep{
     position: relative;
-<<<<<<< HEAD
     padding: 1% 2%;
 
     font-family: "Horizon", sans-serif;
@@ -99,12 +91,3 @@ body{
     width: 100%;
     height: 60%;
 }
-=======
-    padding: 2.5%;
-    padding-left: 5%;
-    padding-right: 5%;
-
-    color: #fff;
-    text-decoration: none;
-}
->>>>>>> origin/main
