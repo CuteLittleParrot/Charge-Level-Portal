@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>   
+        <script src="graphs.js"></script>  
+    </head>
+
+    <body>
+        <div class = "header">
+            <div class = "navbar">
+                <a class = "nav-item" href="index.html">HOME</a>
+                <a class = "nav-sep" href="">|</a>
+                <a class = "nav-item" href="graph.html">GRAPHS</a>
+                <a class = "nav-sep" href="">|</a>
+                <a class = "nav-item" href="">ABOUT</a>
+                <a class = "nav-sep" href="">|</a>
+                <a class = "nav-item" href="https://prof-bernardis.infinityfreeapp.com/Progetti/Progetti_Studenti.php">OTHERS</a>
+            </div>
+        </div>
+
+        <div class="panel" id = "graphs">
+            <div class = maingraph>
+                <div class = "graph-foreground">
+                    <canvas id ="main" ></canvas>
+                </div>
+            </div>
+
+            <div class = subgraphs>
+                <div class = "graph-sub-left">
+                    <canvas id ="left" ></canvas>
+                </div>
+                <div class = "graph-sub-right">
+                    <canvas id ="right" ></canvas>
+                </div>
+            </div>
+             
+        </div>
+    </body>
+</html>
