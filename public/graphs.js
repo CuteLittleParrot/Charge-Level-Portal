@@ -1,90 +1,152 @@
-// Assicurati che lo script venga eseguito dopo il caricamento del documento
-
 const graphScales = {
-    y: {
-        beginAtZero: true,  // Start the Y-axis at 0
-        ticks: {
-            color: 'rgba(255, 255, 255, 0.5)',  // Change tick label color
-        },
-        grid: {
-            color: 'rgba(255, 255, 255, 0.2)',  // Change grid line color
-        },
-        border: {
-            color: 'rgba(255, 255, 255, 0)',  // Change axis line color
-        }
-    },
-    x: {
-        display: false
-    }
+  y: {
+      beginAtZero: true,
+      ticks: {
+          color: 'rgba(255, 255, 255, 0.5)',
+      },
+      grid: {
+          color: 'rgba(255, 255, 255, 0.2)',
+      },
+      border: {
+          color: 'rgba(255, 255, 255, 0)',
+      }
+  },
+  x: {
+      display: false
+  }
 }
 
 const maingraphOptions = {
-    responsive: true,  // Ensures the chart resizes with the window
-    maintainAspectRatio: true,      // Ensures the aspect ratio isn't forced (useful for responsiveness)
-    aspectRatio: 2,
-    scales: graphScales
+  responsive: true,
+  maintainAspectRatio: true,
+  aspectRatio: 4,
+  scales: graphScales
 }
 
 const subgraphOptions = {
-    responsive: true,  // Ensures the chart resizes with the window
-    maintainAspectRatio: true,      // Ensures the aspect ratio isn't forced (useful for responsiveness)
-    aspectRatio: 1,
-    scales: graphScales
+  responsive: true,
+  maintainAspectRatio: true,
+  aspectRatio: 2,
+  scales: graphScales
 }
 
+let voltageChart, currentChart, windChart;
+
+async function fetchData() {
+  const response = await fetch('fetch_data.php');
+  const data = await response.json();
+
+  
+  data.reverse();
 
 
-window.onload = function() {
-    var main = document.getElementById('main').getContext('2d');
-    var myChart = new Chart(main, {
-        type: "line",
-        data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            datasets: [{
-                label: 'My First Dataset',  // Label for the dataset
-                data: [65, 59, 80, 81, 56, 55, 40],  // Data points
-                borderColor: 'rgba(75, 192, 192, 1)',  // Line color
-                backgroundColor: 'rgba(75, 192, 192, 1)',  // Fill color under the line
-                tension: 0.25  // Curvature of the line
-            }]
-        },
-        options: maingraphOptions
-    });
+  const labels = data.map(entry => entry.data);
+  const voltages = data.map(entry => parseFloat(entry.voltage));
+  const currents = data.map(entry => parseFloat(entry.current));
+  const windIntensities = data.map(entry => parseFloat(entry.windIntensity));
+  const windDirections = data.map(entry => entry.windDirection);
+
+  return { labels, voltages, currents, windIntensities, windDirections };
+}
+
+function change() {
+
+}
+
+async function updateCharts() {
+  const { labels, voltages, currents, windIntensities, windDirections } = await fetchData();
+
+  if (!labels) return;  
 
 
+  voltageChart.data.labels = labels;
+  voltageChart.data.datasets[0].data = voltages;
+  voltageChart.update();
 
-    var main = document.getElementById('left').getContext('2d');
-    var myChart = new Chart(left, {
-        type: "line",
-        data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            datasets: [{
-                label: 'My First Dataset',  // Label for the dataset
-                data: [65, 59, 80, 81, 56, 55, 40],  // Data points
-                borderColor: 'rgba(75, 192, 192, 1)',  // Line color
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',  // Fill color under the line
-                tension: 0.1  // Curvature of the line
-            }]
-        },
-        options: subgraphOptions
-    });
+  currentChart.data.labels = labels;
+  currentChart.data.datasets[0].data = currents;
+  currentChart.update();
+
+  windChart.data.labels = labels;
+  windChart.data.datasets[0].data = windIntensities;
+  windChart.options.plugins.tooltip.callbacks.label = function(tooltipItem) {
+      const index = tooltipItem.dataIndex;
+      const direction = windDirections[index];
+      return `Intensità: ${tooltipItem.parsed.y} km/h | Direzione: ${direction}`;
+  };
+  windChart.update();
+}
+
+window.onload = async function() {
+  const { labels, voltages, currents, windIntensities, windDirections } = await fetchData();
+
+  var main = document.getElementById('main').getContext('2d');
+  voltageChart = new Chart(main, {
+      type: "line",
+      data: {
+          labels: labels,
+          datasets: [{
+              label: 'Voltaggio (V)',
+              data: voltages,
+              borderColor: 'rgba(75, 192, 192, 1)',
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              tension: 0.25
+          }]
+      },
+      options: maingraphOptions
+  });
+
+  var left = document.getElementById('left').getContext('2d');
+  currentChart = new Chart(left, {
+      type: "line",
+      data: {
+          labels: labels,
+          datasets: [{
+              label: 'Corrente (A)',
+              data: currents,
+              borderColor: 'rgba(192, 75, 75, 1)',
+              backgroundColor: 'rgba(192, 75, 75, 0.2)',
+              tension: 0.1
+          }]
+      },
+      options: subgraphOptions
+  });
+
+  var right = document.getElementById('right').getContext('2d');
+  windChart = new Chart(right, {
+      type: 'line',
+      data: {
+          labels: labels,
+          datasets: [{
+              label: 'Intensità del Vento (km/h)',
+              data: windIntensities,
+              borderColor: 'rgba(75, 192, 192, 1)',
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              tension: 0.1
+          }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        aspectRatio: 2,
+        scales: graphScales,
+          plugins: {
+              tooltip: {
+                  callbacks: {
+                      title: function(tooltipItems) {
+                          return tooltipItems[0].label;
+                      },
+                      label: function(tooltipItem) {
+                          const index = tooltipItem.dataIndex;
+                          const direction = windDirections[index];
+                          return `Intensità: ${tooltipItem.parsed.y} km/h | Direzione: ${direction}`;
+                      }
+                  }
+              }
+          }
+      }
+  });
 
 
-
-    var main = document.getElementById('right').getContext('2d');
-    var myChart = new Chart(right, {
-        type: "line",
-        data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            datasets: [{
-                label: 'My First Dataset',  // Label for the dataset
-                data: [65, 59, 80, 81, 56, 55, 40],  // Data points
-                borderColor: 'rgba(75, 192, 192, 1)',  // Line color
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',  // Fill color under the line
-                tension: 0.1  // Curvature of the line
-            }]
-        },
-        options: subgraphOptions
-    });
-    
+  setInterval(updateCharts, 60000);
 };

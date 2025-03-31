@@ -3,6 +3,8 @@
 <html>
     <head>
         <title>Charge Level Portal</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>    
 
@@ -16,7 +18,7 @@
                 <a class = "nav-sep" href="">|</a>
                 <a class = "nav-item" href="graph.html">GRAPHS</a>
                 <a class = "nav-sep" href="">|</a>
-                <a class = "nav-item" href="">ABOUT</a>
+                <a class = "nav-item" href="https://github.com/CuteLittleParrot/Charge-Level-Portal.git">GITHUB</a>
                 <a class = "nav-sep" href="">|</a>
                 <a class = "nav-item" href="https://prof-bernardis.infinityfreeapp.com/Progetti/Progetti_Studenti.php">OTHERS</a>
             </div>
@@ -25,23 +27,113 @@
         <div class = "panel" id = "intro">
             <div class = "left-side">
                 <h1 class = "title">CHARGE LEVEL PORTAL</h1>
+                <hr width="95%" size=3 color="#2c2c2c">
                 <p class = "paragraph">
-                    Charge Level Portal è un progetto innovativo dedicato al monitoraggio
-                    dell'amperaggio erogato dai pannelli fotovoltaici.<br><br>
-                    In un mondo sempre più attento alla sostenibilità e all'energia rinnovabile, la nostra 
-                    piattaforma offre strumenti semplici e accessibili per osservare le 
-                    performance del tuo impianto solare in tempo reale.<br><br>
-                    Scopri come ottimizzare il tuo consumo energetico e contribuire a un futuro più 
-                    verde, monitorando i dati cruciali del tuo sistema.
-                    Unisciti a noi e impara a sfruttare al meglio l'energia del sole!
+                    Charge Level Portal è una piattaforma avanzata dedicata al monitoraggio completo e
+                    in tempo reale delle prestazioni di un pannello fotovoltaico. <br>
+                    <br>Attraverso un'interfaccia semplice e intuitiva, il sito consente di visualizzare dati dettagliati come corrente,
+                    tensione, intensità e direzione del vento, fornendo una panoramica precisa e costante dell'efficienza energetica del sistema.<br>
+                    <br>Pensato per chi desidera massimizzare la resa dell'energia solare, il portale offre uno strumento indispensabile per monitorare e 
+                    migliorare l'efficienza del proprio sistema.
                 </p>
             </div>
             
             <div class = "right-side">    
-                       
+                <div class = maingraph>
+                    <div class = "graph-foreground">
+                        <canvas id ="main" ></canvas>
+                    </div>
+                </div>
+
+                <div class="button">
+                    <a href="graph.html">Vai ai grafici	➔ </a>
+                </div>
             </div>
         </div>
         
+
+
+        <script>
+            function f(x) {
+                return Math.pow(x, 3) - 2 * Math.pow(x, 2) + 2;
+            }
+
+
+            const xValues = [];
+            const yValues = [];
+            for (let x = -1.0; x <= 2.2; x += 0.1) {
+                xValues.push(x);
+                yValues.push(f(x));
+            }
+
+
+            const graphScales = {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                       display: false
+                    },
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0)',
+                    },
+                    border: {
+                        color: 'rgba(255, 255, 255, 0)',
+                    }
+                },
+                x: {
+                    display: true,
+                    ticks: {
+                        display: false
+                    },
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0)',
+                    },
+                    border: {
+                        color: 'rgba(255, 255, 255, 0)',
+                    }
+                }
+            };
+
+
+            var main = document.getElementById('main').getContext('2d');
+            var littletest = new Chart(main, {
+                type: "line",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        data: yValues, 
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        tension: 0.25
+                    }]
+                },
+                options: {
+                    scales: graphScales,
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        tooltip: {
+                            enabled: false 
+                        },
+                        legend: {
+                            display: false 
+                        }
+                    }
+                }
+            });
+
+
+        </script>
+        <style>
+            .graph-foreground{
+                margin-top: 3%;
+                margin-left: 3%;
+                height: 90%;
+                width: 83%;
+
+                padding: 7% 7%;
+            }
+        </style>
            
     </body>
 </html>

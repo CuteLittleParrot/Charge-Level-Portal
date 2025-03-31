@@ -3,10 +3,15 @@
     "version": "1.0.0",
     "main": "server.js",
     "scripts": {
-      "start": "node server.js"
+        "start": "node server.js"
     },
     "dependencies": {
-      "express": "^4.17.1"
+        "chart.js": "^4.4.8",
+        "express": "^4.17.1",
+        "react-chartjs-2": "^5.3.0"
+    },
+    "devDependencies": {
+        "@types/react": "^19.0.12",
+        "@types/react-dom": "^19.0.4"
     }
-  }
-  
+}
