@@ -3,8 +3,8 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 $servername = "zeenyk.duckdns.org";
-$username = "root";
-$password = "123";
+$username = "";
+$password = "";
 $dbname = "charge_level_portal";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
