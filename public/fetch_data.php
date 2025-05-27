@@ -2,7 +2,7 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-$servername = "zeenyk.duckdns.org";
+$servername = "localhost";
 $username = "root";
 $password = "123";
 $dbname = "charge_level_portal";
