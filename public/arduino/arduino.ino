@@ -7,7 +7,7 @@ const char* ssid = "ZeenykPhone";
 const char* password = "B3l1m4nF0rd28!";
 
 // URL del server remoto (modifica se necessario)
-const char* server = "zeenyk.duckdns.org";  // Dominio o IP pubblico del server
+const char* server = "80.117.95.166";  // Dominio o IP pubblico del server
 const int port = 80;  // Porta HTTP standard
 
 const int pinvoltage = 0;

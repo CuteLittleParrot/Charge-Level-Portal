@@ -3,8 +3,8 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 $servername = "192.168.1.141";  // Host del database
-$username = "";              // Nome utente del database
-$password = "";               // Password del database
+$username = "root";              // Nome utente del database
+$password = "123";               // Password del database
 $dbname = "charge_level_portal"; // Nome del database
 
 $conn = new mysqli($servername, $username, $password, $dbname);
