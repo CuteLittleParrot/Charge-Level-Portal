@@ -2,8 +2,8 @@
 #include <WiFiS3.h>
 #include <ArduinoHttpClient.h>
 
-const char* ssid = "ZeenykPhone";
-const char* password = "";
+const char* ssid = "ZeenykPhone"; //nome rete per connettersi a internet
+const char* password = "";        //relativa password
 const char* server = "charge-level-portal.duckdns.org";
 const int port = 80;
 
@@ -53,5 +53,5 @@ void loop() {
   int wind = rand() % 15 + 1;
   sendData(voltage, current, wind, "NE");
 
-  delay(60000); // ogni 60 secondi
+  delay(60000); //ogni 60 secondi
 }
