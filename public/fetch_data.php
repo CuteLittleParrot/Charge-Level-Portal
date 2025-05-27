@@ -31,7 +31,6 @@ if ($result->num_rows > 0) {
         ];
     }
 
-    $data = array_reverse($data);
 }
 
 echo json_encode($data); // Stampa i dati come JSON
