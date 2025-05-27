@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 
 header('Content-Type: application/json');
 
-$sql = "SELECT data, voltage, current, windIntensity, windDirection FROM dataset ORDER BY data ASC";
+$sql = "SELECT data, voltage, current, windIntensity, windDirection FROM dataset ORDER BY data DESC LIMIT 20";
 $result = $conn->query($sql);
 
 $data = [];
@@ -30,6 +30,8 @@ if ($result->num_rows > 0) {
             'windDirection' => $row['windDirection']
         ];
     }
+
+    $data = array_reverse($data);
 }
 
 echo json_encode($data); // Stampa i dati come JSON
